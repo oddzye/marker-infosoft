@@ -17,7 +17,7 @@ class CreateMarkerInput extends Component {
 
     keyPressHandle = (e) => {
         if (e.key === 'Enter') {
-            console.log("YOOHO")
+            this.props.addMarkerHandle(this.state.inputValue);
         }
     }
 
