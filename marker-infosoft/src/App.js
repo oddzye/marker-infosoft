@@ -9,22 +9,23 @@ class App extends Component {
     super()
 
     this.state = {
-      markers: ['Marker1', 'Marker2']
+      markers: [{value: 'Marker1', coords: [55.756, 37.576]}, {value: 'Marker2', coords: [55.752, 37.571]}]
     }
   }
 
   onAddMarker = (value) => {
     this.setState({
-      markers: [...this.state.markers, value]
+      markers: [...this.state.markers, {value: value, coords: [55.75, 37.57]}]
     })
   }
 
   render() {
+    const { markers } = this.state; 
     return (
       <>
         <CreateMarkerInput addMarkerHandle={this.onAddMarker} />
-        <MarkerTable markers={this.state.markers}/>
-        <MainMap/>
+        <MarkerTable markers={markers}/>
+        <MainMap markers={markers}/>
       </>
     );
   }
