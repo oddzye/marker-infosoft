@@ -8,7 +8,7 @@ class MarkerTable extends Component {
 
     showMarkers = () => {
         const { markers } = this.props;
-        return markers.map(item => <MarkerItem marker={item.value}/>)
+        return markers.map((item, idx) => <MarkerItem  key={idx} marker={item.value}/>)
     }
 
     render() {

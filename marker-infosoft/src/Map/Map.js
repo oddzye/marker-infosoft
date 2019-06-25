@@ -1,31 +1,54 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { YMaps, Map, Placemark, Polyline} from 'react-yandex-maps';
 
-const MainMap = (props) => {
-    console.log(props.markers)
-    return (
-        <YMaps>
-            <Map width={800} height={600} defaultState={{ center: [55.75, 37.57], zoom: 9 }}>
-                {showMarkers(props.markers)}
-                {showPolylines(props.markers)}
-            </Map>
-        </YMaps>
-    )
-}
+class MainMap extends Component {
+    constructor() {
+        super()
+    }
 
-const showMarkers = (markersArr) => {
-    return markersArr.map(item => <Placemark options={{draggable: true}} geometry={item.coords} />)
-}
+    showMarkers = (markersArr) => {
+        
+        return markersArr.map((marker, idx) => {
+            return <Placemark onDragEnd={(e) => this.onDragEndHandler(e, idx, marker)} options={{draggable: true}} geometry={marker.coords} />
+        }
+        )
+    }
 
-const showPolylines = (markersArr) => {
-    return markersArr.length >= 2 ? markersArr.map((item, idx, markers) => <Polyline 
-                    geometry={[item.coords, markers[idx].coords]}
-                    options={{
-                        balloonCloseButton: false,
-                        strokeColor: '#000',
-                        strokeWidth: 4,
-                        strokeOpacity: 0.5,
-                    }}/>) : null;
+    onDragEndHandler = (e, markerItem, markerIdx) => {
+        const { onMarkerPositionChanged } = this.props;
+        const coords = e.originalEvent.position;
+        onMarkerPositionChanged(coords, markerIdx, markerItem);
+    }
+
+    showPolylines = (markersArr) => {
+        return markersArr.length >= 2 ? markersArr.map((item, idx, markers) => {
+            if (idx >= markers.length - 1) return null;
+            return <Polyline 
+            geometry={[item.coords, markers[idx + 1].coords]}
+            options={{
+                balloonCloseButton: false,
+                strokeColor: '#000',
+                strokeWidth: 4,
+                strokeOpacity: 0.5,
+            }}/>
+        }) 
+        : null;
+    }
+
+    render() {
+        const { markers } = this.props;
+        console.log(this.props);
+        return (
+            <YMaps >
+                <Map onLoad={ymaps => console.log(ymaps)} width={800} height={600} defaultState={{ center: [55.75, 37.57], zoom: 9 }}>
+                    {this.showMarkers(markers)}
+                    {this.showPolylines(markers)}
+                </Map>
+            </YMaps>
+        )
+    }
+    
+    
 }
 
 

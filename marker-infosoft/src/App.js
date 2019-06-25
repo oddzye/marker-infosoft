@@ -9,8 +9,19 @@ class App extends Component {
     super()
 
     this.state = {
-      markers: [{value: 'Marker1', coords: [55.756, 37.576]}, {value: 'Marker2', coords: [55.752, 37.571]}]
+      markers: []
     }
+  }
+
+  onMarkerPositionChanged = (coords, idx, item) => {
+    console.log("markers array when position changed : ", this.state.markers);
+    console.log(" change marker item - ", item, " change marker idx - ", idx);
+    this.setState({
+      markers: [
+        ...this.state.markers.slice(0, idx),
+        ...this.state.markers.slice(idx + 1)
+      ]
+    })
   }
 
   onAddMarker = (value) => {
@@ -21,11 +32,12 @@ class App extends Component {
 
   render() {
     const { markers } = this.state; 
+    console.log("current array of markers: ", markers);
     return (
       <>
         <CreateMarkerInput addMarkerHandle={this.onAddMarker} />
         <MarkerTable markers={markers}/>
-        <MainMap markers={markers}/>
+        <MainMap onMarkerPositionChanged={this.onMarkerPositionChanged} markers={markers}/>
       </>
     );
   }
