@@ -6,13 +6,10 @@ class MainMap extends Component {
         super()
     }
 
-    showMarkers = (markersArr) => {
-        
-        return markersArr.map((marker, idx) => {
-            return <Placemark key={idx} onDragEnd={(e) => this.onDragEndHandler(e, idx, marker)} options={{draggable: true}} geometry={marker.coords} />
-        }
-        )
-    }
+    showMarkers = markersArr => markersArr.map((marker, idx) => (
+        <Placemark key={idx} onDragEnd={(e) => this.onDragEndHandler(e, idx, marker)} options={{draggable: true}} geometry={marker.coords} />
+    ))
+      
 
     onDragEndHandler = (e, markerIdx, markerItem) => {
         const { onMarkerPositionChanged } = this.props;
