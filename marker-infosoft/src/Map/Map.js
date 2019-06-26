@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { YMaps, Map, Placemark, Polyline} from 'react-yandex-maps';
-
+import { markerPositionChanged } from '../actions/actionCreators';
+import { connect } from 'react-redux';
 class MainMap extends Component {
     constructor() {
         super()
     }
 
     showMarkers = markersArr => markersArr.map((marker, idx) => (
-        <Placemark key={idx} onDragEnd={(e) => this.onDragEndHandler(e, idx, marker)} options={{draggable: true}} geometry={marker.coords} />
+        <Placemark modules={['geoObject.addon.balloon']} properties={{ balloonContent: marker.markerName}} key={idx} onDragEnd={(e) => this.onDragEndHandler(e, idx, marker)} options={{draggable: true}} geometry={marker.coords} />
     ))
       
     onDragEndHandler = (e, markerIdx, markerItem) => {
-        const { onMarkerPositionChanged } = this.props;
+        const { markerPositionChanged } = this.props;
         const coords = e.originalEvent.target.geometry.getCoordinates();
-        onMarkerPositionChanged(coords, markerIdx, markerItem);
+        markerPositionChanged(coords, markerIdx, markerItem);
     }
 
     showPolylines = (markersArr) => {
@@ -35,10 +36,9 @@ class MainMap extends Component {
 
     render() {
         const { markers } = this.props;
-        console.log(this.props);
         return (
             <YMaps >
-                <Map onLoad={ymaps => console.log(ymaps)} width={800} height={600} defaultState={{ center: [55.75, 37.57], zoom: 9 }}>
+                <Map width={800} height={600} defaultState={{ center: [55.75, 37.57], zoom: 9 }}>
                     {this.showMarkers(markers)}
                     {this.showPolylines(markers)}
                 </Map>
@@ -49,5 +49,12 @@ class MainMap extends Component {
     
 }
 
+const mapStateToProps = ({markers: {markers}}) => ({
+    markers
+  })
 
-export default MainMap;
+const mapDispatchToProps = dispatch => ({
+    markerPositionChanged: (coords, markerIdx, markerItem) => dispatch(markerPositionChanged(coords, markerIdx, markerItem))
+})
+ 
+export default connect(mapStateToProps, mapDispatchToProps)(MainMap);

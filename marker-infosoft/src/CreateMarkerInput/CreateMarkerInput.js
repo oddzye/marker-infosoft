@@ -1,23 +1,24 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import { addMarker } from '../actions/actionCreators';
+import { connect } from 'react-redux';
 
 class CreateMarkerInput extends Component {
-        state = {
-            inputValue: ''
-        }
-
+    state = {
+        inputValue: ''
+    }
+    
     inputValueChangeHandle = ({ target: { value } }) => {
         this.setState({
             inputValue: value
         })
-        console.log(this.state.inputValue)
     }
 
     keyPressHandle = ({ key }) => {
         const { inputValue } = this.state;
-        const { addMarkerHandle } = this.props;
+        const { addMarker } = this.props;
         const minMarkerNameLength = 3;
         if (inputValue.length >= minMarkerNameLength && key === 'Enter') {
-            addMarkerHandle(inputValue);
+            addMarker(inputValue);
             this.setState({
                 inputValue: ''
             })
@@ -36,4 +37,9 @@ class CreateMarkerInput extends Component {
     }
 }
 
-export default CreateMarkerInput;
+
+const mapDispatchToProps = dispatch => ({
+    addMarker: (markerName) => dispatch(addMarker(markerName))
+})
+
+export default connect(null, mapDispatchToProps)(CreateMarkerInput);
