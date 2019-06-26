@@ -9,21 +9,24 @@ class MainMap extends Component {
     showMarkers = (markersArr) => {
         
         return markersArr.map((marker, idx) => {
-            return <Placemark onDragEnd={(e) => this.onDragEndHandler(e, idx, marker)} options={{draggable: true}} geometry={marker.coords} />
+            return <Placemark key={idx} onDragEnd={(e) => this.onDragEndHandler(e, idx, marker)} options={{draggable: true}} geometry={marker.coords} />
         }
         )
     }
 
-    onDragEndHandler = (e, markerItem, markerIdx) => {
+    onDragEndHandler = (e, markerIdx, markerItem) => {
+        console.log("onDragEvent", e);
         const { onMarkerPositionChanged } = this.props;
-        const coords = e.originalEvent.position;
+        const coords = e.originalEvent.target.geometry.getCoordinates();
+        console.log(coords);
         onMarkerPositionChanged(coords, markerIdx, markerItem);
     }
 
     showPolylines = (markersArr) => {
         return markersArr.length >= 2 ? markersArr.map((item, idx, markers) => {
             if (idx >= markers.length - 1) return null;
-            return <Polyline 
+            return <Polyline
+            key={idx} 
             geometry={[item.coords, markers[idx + 1].coords]}
             options={{
                 balloonCloseButton: false,

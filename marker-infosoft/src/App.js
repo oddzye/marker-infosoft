@@ -14,14 +14,15 @@ class App extends Component {
   }
 
   onMarkerPositionChanged = (coords, idx, item) => {
-    console.log("markers array when position changed : ", this.state.markers);
-    console.log(" change marker item - ", item, " change marker idx - ", idx);
-    this.setState({
+    console.log("markers array before position changed : ", this.state.markers);
+    console.log(" change marker item - ", item.value, "marker coords- ", coords,  " change marker idx - ", idx);
+    this.setState((state) => ({
       markers: [
-        ...this.state.markers.slice(0, idx),
-        ...this.state.markers.slice(idx + 1)
+        ...state.markers.slice(0, idx),
+        {value: item.value, coords},
+        ...state.markers.slice(idx + 1)
       ]
-    })
+    }))
   }
 
   onAddMarker = (value) => {
