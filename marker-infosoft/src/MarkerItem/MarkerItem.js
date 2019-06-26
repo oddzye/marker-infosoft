@@ -1,7 +1,16 @@
 import React from 'react';
+import { removeMarker } from '../actions/actionCreators';
+import { connect } from 'react-redux';
 
-const MarkerItem = ({marker}) => {
-    return <li>{marker}</li>
+const MarkerItem = ({marker, idx, removeMarker}) => {
+    return  <li>
+                {marker}
+                <button onClick={() => removeMarker(idx)}>&times;</button>
+            </li>
 }
 
-export default MarkerItem;
+const mapDispatchToProps = dispatch => ({
+    removeMarker: (idx) => dispatch(removeMarker(idx))
+})
+
+export default connect(null, mapDispatchToProps)(MarkerItem);

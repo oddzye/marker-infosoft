@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 class MarkerTable extends Component {
     showMarkers = () => {
         const { markers } = this.props;
-        return markers.map((item, idx) => <MarkerItem  key={idx} marker={item.markerName}/>)
+        return markers.map((item, idx) => <MarkerItem  key={idx} idx={idx} marker={item.markerName}/>)
     }
 
     render() {
@@ -19,7 +19,7 @@ class MarkerTable extends Component {
     }
 }
 
-const mapStateToProps = ({markers: {markers}}) => ({
+const mapStateToProps = ({markers}) => ({
     markers
   })
 

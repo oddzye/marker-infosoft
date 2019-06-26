@@ -16,10 +16,9 @@ class App extends Component {
       </>
     );
   }
-  
 }
 
-const mapStateToProps = ({markers: {markers}}) => ({
+const mapStateToProps = ({markers}) => ({
   markers
 })
 

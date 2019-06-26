@@ -9,3 +9,8 @@ export const markerPositionChanged = (coords, idx, { markerName }) => ({
     idx,
     markerName
 }) 
+
+export const removeMarker = id => ({
+    type: 'REMOVE_MARKER',
+    id
+})
