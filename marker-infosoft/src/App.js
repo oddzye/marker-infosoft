@@ -31,7 +31,6 @@ class App extends Component {
 
   render() {
     const { markers } = this.state; 
-    console.log("current array of markers: ", markers);
     return (
       <>
         <CreateMarkerInput addMarkerHandle={this.onAddMarker} />

@@ -1,7 +1,6 @@
 import React from 'react';
 
-const MarkerItem = (props) => {
-    const {marker, } = props;
+const MarkerItem = ({marker}) => {
     return <li>{marker}</li>
 }
 

@@ -1,29 +1,37 @@
 import React, {Component} from 'react'
 
 class CreateMarkerInput extends Component {
-    constructor() {
-        super()
-        this.state = {
-            inputValue: null
+        state = {
+            inputValue: ''
         }
-    }
 
-    inputValueChangeHandle = (e) => {
+    inputValueChangeHandle = ({ target: { value } }) => {
         this.setState({
-            inputValue: e.target.value
+            inputValue: value
         })
         console.log(this.state.inputValue)
     }
 
-    keyPressHandle = (e) => {
-        if (e.key === 'Enter') {
-            this.props.addMarkerHandle(this.state.inputValue);
+    keyPressHandle = ({ key }) => {
+        const { inputValue } = this.state;
+        const { addMarkerHandle } = this.props;
+        const minMarkerNameLength = 3;
+        if (inputValue.length >= minMarkerNameLength && key === 'Enter') {
+            addMarkerHandle(inputValue);
+            this.setState({
+                inputValue: ''
+            })
         }
     }
 
     render() {
+        const { inputValue } = this.state;
         return (
-            <input onKeyPress={this.keyPressHandle} onChange={this.inputValueChangeHandle}/>
+            <>  
+                <label htmlFor="add-marker__input">Please, enter marker name: </label>
+                <input id="add-marker__input" value={inputValue} onKeyPress={this.keyPressHandle} onChange={this.inputValueChangeHandle}/>
+            </>
+            
         )
     }
 }
