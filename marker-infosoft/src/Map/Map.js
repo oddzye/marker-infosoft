@@ -15,10 +15,8 @@ class MainMap extends Component {
     }
 
     onDragEndHandler = (e, markerIdx, markerItem) => {
-        console.log("onDragEvent", e);
         const { onMarkerPositionChanged } = this.props;
         const coords = e.originalEvent.target.geometry.getCoordinates();
-        console.log(coords);
         onMarkerPositionChanged(coords, markerIdx, markerItem);
     }
 
@@ -26,14 +24,14 @@ class MainMap extends Component {
         return markersArr.length >= 2 ? markersArr.map((item, idx, markers) => {
             if (idx >= markers.length - 1) return null;
             return <Polyline
-            key={idx} 
-            geometry={[item.coords, markers[idx + 1].coords]}
-            options={{
-                balloonCloseButton: false,
-                strokeColor: '#000',
-                strokeWidth: 4,
-                strokeOpacity: 0.5,
-            }}/>
+                key={idx} 
+                geometry={[item.coords, markers[idx + 1].coords]}
+                options={{
+                    balloonCloseButton: false,
+                    strokeColor: '#000',
+                    strokeWidth: 4,
+                    strokeOpacity: 0.5,
+                }}/>
         }) 
         : null;
     }
