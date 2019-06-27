@@ -1,0 +1,11 @@
+.marker-input {
+    padding: 8px;
+    min-width: 400px;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    margin-bottom: 30px;
+}
+
+.marker-input__label {
+    margin-bottom: 10px;
+}

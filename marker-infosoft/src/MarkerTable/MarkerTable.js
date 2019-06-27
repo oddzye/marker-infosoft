@@ -3,6 +3,8 @@ import MarkerItem from '../MarkerItem/MarkerItem';
 import { connect } from 'react-redux';
 import { Droppable, DragDropContext } from 'react-beautiful-dnd';
 import { reorderMarkerList } from '../actions/actionCreators';
+import CreateMarkerInput from '../CreateMarkerInput/CreateMarkerInput';
+import './MarkerTable.css'
 
 class MarkerTable extends Component {
     showMarkers = () => {
@@ -11,11 +13,6 @@ class MarkerTable extends Component {
             <MarkerItem  key={idx} idx={idx} marker={item.markerName}/>
          )
     }
-    getListStyle = isDraggingOver => ({
-        background: isDraggingOver ? "lightblue" : "lightgrey",
-        padding: 8,
-        width: 250
-      });
 
     DragEndHandler = result => {
         const { reorderMarkerList } = this.props;
@@ -28,21 +25,24 @@ class MarkerTable extends Component {
 
     render() {
         return (
-            <DragDropContext onDragEnd={this.DragEndHandler}>
-            <Droppable droppableId="droppable">
-                {(provided, snapshot) => (
-                    <ul
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        style={this.getListStyle(snapshot.isDraggingOver)}
-                    >
-                        {this.showMarkers()}
-                        {provided.placeholder}
-                    </ul>
-                    
-                )}
-            </Droppable> 
-            </DragDropContext> 
+            <div className="marker-from__container">
+                <CreateMarkerInput />
+                <DragDropContext onDragEnd={this.DragEndHandler}>
+                <Droppable droppableId="droppable">
+                    {provided => (
+                        <ul
+                            className="marker-list"
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}
+                        >
+                            {this.showMarkers()}
+                            {provided.placeholder}
+                        </ul>
+                        
+                    )}
+                </Droppable> 
+                </DragDropContext> 
+            </div>
         )
     }
 }

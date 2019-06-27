@@ -1,0 +1,14 @@
+.marker-list {
+    background-color: lightblue;
+    padding: 20px;
+    width: 40%;
+    list-style-type: none;
+    border-radius: 5px;
+}
+
+.marker-from__container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+}

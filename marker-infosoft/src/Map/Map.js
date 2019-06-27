@@ -42,7 +42,7 @@ class MainMap extends Component {
         const { markers } = this.props;
         return (
             <YMaps >
-                <Map width={800} height={600} defaultState={{ center: [55.75, 37.57], zoom: 9 }}>
+                <Map width={1200} height={700} defaultState={{ center: [55.75, 37.57], zoom: 9 }}>
                     {this.showMarkers(markers)}
                     {this.showPolylines(markers)}
                 </Map>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { addMarker } from '../actions/actionCreators';
 import { connect } from 'react-redux';
+import './CreateMarkerInput.css'
 
 class CreateMarkerInput extends Component {
     state = {
@@ -17,7 +18,8 @@ class CreateMarkerInput extends Component {
         const { inputValue } = this.state;
         const { addMarker } = this.props;
         const minMarkerNameLength = 3;
-        if (inputValue.length >= minMarkerNameLength && key === 'Enter') {
+        const maxMarkerNameLength = 20;
+        if (inputValue.length >= minMarkerNameLength && inputValue.length <= maxMarkerNameLength && key === 'Enter') {
             addMarker(inputValue);
             this.setState({
                 inputValue: ''
@@ -29,8 +31,8 @@ class CreateMarkerInput extends Component {
         const { inputValue } = this.state;
         return (
             <>  
-                <label htmlFor="add-marker__input">Please, enter marker name: </label>
-                <input id="add-marker__input" value={inputValue} onKeyPress={this.keyPressHandle} onChange={this.inputValueChangeHandle}/>
+                <label className="marker-input__label" htmlFor="add-marker__input">Пожалуйста, введите название маркера и нажмите 'Enter' для добавления: </label>
+                <input className="marker-input" id="add-marker__input" value={inputValue} onKeyPress={this.keyPressHandle} onChange={this.inputValueChangeHandle}/>
             </>
             
         )

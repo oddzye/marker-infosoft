@@ -1,0 +1,25 @@
+.marker-btn {
+    position: absolute;
+    right: 0;
+    background-color: white;
+    border: none;
+    font-size: 20px;
+    outline: none;
+}
+
+.marker-btn:hover {
+    cursor: pointer;
+}
+
+.marker-item {
+    position: relative;
+    list-style-type: none;
+    margin-bottom: 10px;
+    border: 1px solid rgb(55, 205, 243);
+    border-radius: 5px;
+    padding: 10px;
+    background-color: aliceblue;
+}
+
+
+
