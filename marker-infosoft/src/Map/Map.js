@@ -3,12 +3,16 @@ import { YMaps, Map, Placemark, Polyline} from 'react-yandex-maps';
 import { markerPositionChanged } from '../actions/actionCreators';
 import { connect } from 'react-redux';
 class MainMap extends Component {
-    constructor() {
-        super()
-    }
 
     showMarkers = markersArr => markersArr.map((marker, idx) => (
-        <Placemark modules={['geoObject.addon.balloon']} properties={{ balloonContent: marker.markerName}} key={idx} onDragEnd={(e) => this.onDragEndHandler(e, idx, marker)} options={{draggable: true}} geometry={marker.coords} />
+        <Placemark  
+            modules={['geoObject.addon.balloon']} 
+            properties={{ balloonContent: marker.markerName}} 
+            key={idx}
+            onDragEnd={(e) => this.onDragEndHandler(e, idx, marker)} 
+            options={{draggable: true}}
+            geometry={marker.coords} 
+        />
     ))
       
     onDragEndHandler = (e, markerIdx, markerItem) => {

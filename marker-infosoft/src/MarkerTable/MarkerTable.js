@@ -1,20 +1,31 @@
 import React, { Component } from 'react'
 import MarkerItem from '../MarkerItem/MarkerItem';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { Droppable, DragDropContext } from 'react-beautiful-dnd';
+
 class MarkerTable extends Component {
     showMarkers = () => {
         const { markers } = this.props;
-        return markers.map((item, idx) => <MarkerItem  key={idx} idx={idx} marker={item.markerName}/>)
+        return markers.map((item, idx) =>
+            <MarkerItem  key={idx} idx={idx} marker={item.markerName}/>
+         )
     }
 
     render() {
         
         return (
-            <>
-                <ul>
-                    {this.showMarkers()}
-                </ul>
-            </>
+            <DragDropContext>
+            <Droppable droppableId="droppable">
+                {(provided) => (
+                    <ul
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                    >
+                        {this.showMarkers()}
+                    </ul>
+                )}
+            </Droppable> 
+            </DragDropContext> 
         )
     }
 }
