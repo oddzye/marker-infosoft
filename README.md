@@ -12,3 +12,4 @@
 Большее количество времени заняло ознакомление с библиотеками react-beautiful-dnd и react-yandex-maps. (3 ч.)
 5 часов ушло на построение стандартного React + Redux приложения.
 
+![Иллюстрация к проекту](https://github.com/oddzye/marker-infosoft/raw/master/marker-infosoft/src/img/app.png)
