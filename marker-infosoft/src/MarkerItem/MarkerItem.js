@@ -5,8 +5,8 @@ import { Draggable } from 'react-beautiful-dnd';
 
 const MarkerItem = ({marker, idx, removeMarker}) => {
     return  (
-        <Draggable draggableId="draggable" index={idx}>
-            {(provided) => (
+        <Draggable draggableId={marker} index={idx}>
+            {(provided,) => (
                 <li ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}

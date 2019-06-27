@@ -27,6 +27,11 @@ export const markers = (state = MARKERS, action) => {
             return [...state].filter((marker, id) => {
                 return action.id !== id
             })
+        case 'REORDER_MARKER_LIST':
+            const result = [...state];
+            const [removed] = result.splice(action.startIndex, 1);
+            result.splice(action.endIndex, 0, removed);
+            return result;
         default:
             return [...state];
     }

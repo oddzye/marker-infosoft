@@ -14,3 +14,9 @@ export const removeMarker = id => ({
     type: 'REMOVE_MARKER',
     id
 })
+
+export const reorderMarkerList = (startIndex, endIndex) => ({
+    type: 'REORDER_MARKER_LIST',
+    startIndex,
+    endIndex
+})
