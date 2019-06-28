@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { YMaps, Map, Placemark, Polyline} from 'react-yandex-maps';
 import { markerPositionChanged } from '../actions/actionCreators';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 const MainMap = (props) => {
     const { markers } = props;
     return (
-        <YMaps >
+        <YMaps>
             <Map width={1200} height={700} defaultState={{ center: [55.75, 37.57], zoom: 9 }}>
                 {showMarkers(markers, props)}
                 {showPolylines(markers)}

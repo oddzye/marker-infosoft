@@ -2,6 +2,7 @@ import React from 'react';
 import { removeMarker } from '../actions/actionCreators';
 import { connect } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
+import PropTypes from 'prop-types';
 import './MarkerItem.css'
 
 const MarkerItem = ({marker, idx, removeMarker}) => {
@@ -27,5 +28,9 @@ const MarkerItem = ({marker, idx, removeMarker}) => {
 const mapDispatchToProps = dispatch => ({
     removeMarker: (idx) => dispatch(removeMarker(idx))
 })
+
+MarkerItem.propTypes = {
+    removeMarker: PropTypes.func.isRequired
+}
 
 export default connect(null, mapDispatchToProps)(MarkerItem);

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { addMarker } from '../actions/actionCreators';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './CreateMarkerInput.css'
 
 class CreateMarkerInput extends Component {
@@ -43,5 +44,9 @@ class CreateMarkerInput extends Component {
 const mapDispatchToProps = dispatch => ({
     addMarker: (markerName) => dispatch(addMarker(markerName))
 })
+
+CreateMarkerInput.propTypes = {
+    addMarker: PropTypes.func.isRequired
+}
 
 export default connect(null, mapDispatchToProps)(CreateMarkerInput);
