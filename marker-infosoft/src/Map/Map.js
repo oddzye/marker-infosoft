@@ -16,18 +16,17 @@ const MainMap = (props) => {
     )
 }
 
-const onDragEndHandler = (e, markerIdx, markerItem, props) => {
-    const { markerPositionChanged } = props;
+const onDragEndHandler = (e, markerIdx, markerItem, markerPositionChanged) => {
     const coords = e.originalEvent.target.geometry.getCoordinates();
     markerPositionChanged(coords, markerIdx, markerItem);
 }
 
-const showMarkers = (markersArr, props) => markersArr.map((marker, idx) => (
+const showMarkers = (markersArr, { markerPositionChanged }) => markersArr.map((marker, idx) => (
     <Placemark  
         modules={['geoObject.addon.balloon']} 
         properties={{ balloonContent: marker.markerName}} 
         key={idx}
-        onDragEnd={(e) => onDragEndHandler(e, idx, marker, props)} 
+        onDragEnd={(e) => onDragEndHandler(e, idx, marker, markerPositionChanged)} 
         options={{draggable: true}}
         geometry={marker.coords} 
     />
