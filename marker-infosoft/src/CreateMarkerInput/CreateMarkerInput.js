@@ -33,7 +33,7 @@ class CreateMarkerInput extends Component {
         return (
             <>  
                 <label className="marker-input__label" htmlFor="add-marker__input">Пожалуйста, введите название маркера и нажмите 'Enter' для добавления: </label>
-                <input className="marker-input" id="add-marker__input" value={inputValue} onKeyPress={this.keyPressHandle} onChange={this.inputValueChangeHandle}/>
+                <input placeholder="Название маркера..." className="marker-input" id="add-marker__input" value={inputValue} onKeyPress={this.keyPressHandle} onChange={this.inputValueChangeHandle}/>
             </>
             
         )
