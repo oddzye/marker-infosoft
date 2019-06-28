@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import MarkerItem from '../MarkerItem/MarkerItem';
 import { connect } from 'react-redux';
 import { Droppable, DragDropContext } from 'react-beautiful-dnd';
@@ -6,28 +6,11 @@ import { reorderMarkerList } from '../actions/actionCreators';
 import CreateMarkerInput from '../CreateMarkerInput/CreateMarkerInput';
 import './MarkerTable.css'
 
-class MarkerTable extends Component {
-    showMarkers = () => {
-        const { markers } = this.props;
-        return markers.map((item, idx) =>
-            <MarkerItem  key={idx} idx={idx} marker={item.markerName}/>
-         )
-    }
-
-    dragEndHandler = result => {
-        const { reorderMarkerList } = this.props;
-        if (!result.destination) {
-            return;
-        }
-
-        reorderMarkerList(result.source.index, result.destination.index)
-    }
-
-    render() {
+const MarkerTable = (props) => {
         return (
             <div className="marker-from__container">
                 <CreateMarkerInput />
-                <DragDropContext onDragEnd={this.dragEndHandler}>
+                <DragDropContext onDragEnd={(result) => dragEndHandler(result, props)}>
                 <Droppable droppableId="droppable">
                     {provided => (
                         <ul
@@ -35,7 +18,7 @@ class MarkerTable extends Component {
                             {...provided.droppableProps}
                             ref={provided.innerRef}
                         >
-                            {this.showMarkers()}
+                            {showMarkers(props)}
                             {provided.placeholder}
                         </ul>
                         
@@ -44,7 +27,24 @@ class MarkerTable extends Component {
                 </DragDropContext> 
             </div>
         )
+    
+}
+
+
+const dragEndHandler = (result , props) => {
+    const { reorderMarkerList } = props;
+    if (!result.destination) {
+        return;
     }
+
+    reorderMarkerList(result.source.index, result.destination.index)
+}
+
+const showMarkers = (props) => {
+    const { markers } = props;
+    return markers.map((item, idx) =>
+        <MarkerItem  key={idx} idx={idx} marker={item.markerName}/>
+     )
 }
 
 const mapStateToProps = ({markers}) => ({
