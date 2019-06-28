@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Droppable, DragDropContext } from 'react-beautiful-dnd';
 import { reorderMarkerList } from '../actions/actionCreators';
 import CreateMarkerInput from '../CreateMarkerInput/CreateMarkerInput';
+import PropTypes from 'prop-types';
 import './MarkerTable.css'
 
 const MarkerTable = (props) => {
@@ -30,7 +31,6 @@ const MarkerTable = (props) => {
     
 }
 
-
 const dragEndHandler = (result , props) => {
     const { reorderMarkerList } = props;
     if (!result.destination) {
@@ -54,6 +54,11 @@ const mapStateToProps = ({markers}) => ({
 const mapDispatchToProps = dispatch => ({
     reorderMarkerList: (startIndex, endIndex) => dispatch(reorderMarkerList(startIndex, endIndex))
 })
+
+MarkerTable.propTypes = {
+    markers: PropTypes.array.isRequired,
+    reorderMarkerList: PropTypes.func.isRequired
+}
 
 
 
