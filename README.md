@@ -1,4 +1,4 @@
-# marker-infosoft
+# Marker-infosoft
 Тестовое задание для infosoft service.
 
 ## Описание :
