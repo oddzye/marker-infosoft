@@ -14,7 +14,7 @@ class MarkerTable extends Component {
          )
     }
 
-    DragEndHandler = result => {
+    dragEndHandler = result => {
         const { reorderMarkerList } = this.props;
         if (!result.destination) {
             return;
@@ -27,7 +27,7 @@ class MarkerTable extends Component {
         return (
             <div className="marker-from__container">
                 <CreateMarkerInput />
-                <DragDropContext onDragEnd={this.DragEndHandler}>
+                <DragDropContext onDragEnd={this.dragEndHandler}>
                 <Droppable droppableId="droppable">
                     {provided => (
                         <ul
