@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import './MarkerItem.css'
 
 const MarkerItem = ({marker, idx, removeMarker}) => {
+    console.log(marker , idx , removeMarker);
     return  (
         <Draggable draggableId={marker} index={idx}>
             {provided => (

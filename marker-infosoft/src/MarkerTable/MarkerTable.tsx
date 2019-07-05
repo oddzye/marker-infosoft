@@ -7,6 +7,10 @@ import CreateMarkerInput from '../CreateMarkerInput/CreateMarkerInput';
 import PropTypes from 'prop-types';
 import './MarkerTable.css'
 
+
+
+
+
 const MarkerTable = (props) => {
         return (
             <div className="marker-from__container">
@@ -31,7 +35,7 @@ const MarkerTable = (props) => {
     
 }
 
-const dragEndHandler = (result , props) => {
+const dragEndHandler = (result, props) => {
     const { reorderMarkerList } = props;
     if (!result.destination) {
         return;
